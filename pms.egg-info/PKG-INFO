@@ -1,0 +1,48 @@
+Metadata-Version: 2.4
+Name: pms
+Version: 0.1.0
+Summary: Process Modeling System (PMS) orchestrator and ML pipelines
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: scikit-learn>=1.3.0
+Requires-Dist: xgboost>=1.7.0
+Requires-Dist: optuna>=3.6.0
+Requires-Dist: keras-tuner>=1.4.7
+Requires-Dist: tensorflow>=2.15.0; platform_machine != "aarch64"
+Requires-Dist: matplotlib>=3.8.0
+Requires-Dist: seaborn>=0.13.0
+Requires-Dist: plotly>=5.20.0
+Requires-Dist: shap>=0.44.0
+Requires-Dist: lime>=0.2.0.1
+Requires-Dist: joblib>=1.3.0
+Requires-Dist: pydantic>=2.7.0
+Requires-Dist: pydantic-settings>=2.2.0
+Requires-Dist: pyyaml>=6.0.1
+Requires-Dist: rich>=13.7.0
+Requires-Dist: click>=8.1.7
+
+# PMS Orchestrator (Python)
+
+CLI orchestration for data loading, model training, hyperparameter optimization, evaluation, and persistence. Multi-engine HPO support (none, random, grid, Optuna, Keras Tuner).
+
+## Quickstart
+
+1) Create a CSV `sample.csv` with columns including target `y`.
+2) Edit `configs/example_svr.yaml` to point to your data.
+3) Run without installing the package using the module path:
+```bash
+python -m pms.cli --help
+python -m pms.cli show-config --config configs/example_svr.yaml
+python -m pms.cli run --config configs/example_svr.yaml
+```
+
+Artifacts and metadata will be stored under `train.output_dir`.
+
+## Design
+
+- Python-only orchestrator (`click` CLI)
+- Modular trainers (`pms/training`)
+- Pluggable HPO engines (`pms/hpo`)
+- Config-driven runs (YAML)

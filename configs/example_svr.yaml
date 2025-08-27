@@ -1,0 +1,24 @@
+data:
+  input_path: "sample.csv"
+  target: "y"
+  sep: ","
+  index_col: null
+  features: null
+
+train:
+  task: "svr"
+  output_dir: "artifacts/svr_example"
+  random_state: 42
+  test_size: 0.2
+  metrics: ["r2", "rmse", "mae"]
+  svr:
+    kernel: "rbf"
+    C: 1.0
+    epsilon: 0.1
+    gamma: "scale"
+  hpo:
+    engine: "optuna" # none|random|grid|optuna|kerastuner
+    n_trials: 10
+    timeout_s: 60
+    seed: 42
+
